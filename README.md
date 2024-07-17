@@ -25,20 +25,20 @@ conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit
 
 2. Install dependencies:
 ```
-+ imageio 2.19.1
-+ Pillow 9.1.0
-+ scikit-image 0.19.3
-+ scikit-learn 0.24.2
-+ scipy 1.7.0
-+ tensorboard 2.10.0
-+ tqdm 4.51.0
-+ pandas 1.3.0
-+ timm 0.6.11
-+ torchvision 0.13.1
-+ h5py 3.3.0
-+ opencv-python 4.8.0.76
-+ matplotlib 3.4.2
-+ PyYAML 5.4.1
+- imageio 2.19.1
+- Pillow 9.1.0
+- scikit-image 0.19.3
+- scikit-learn 0.24.2
+- scipy 1.7.0
+- tensorboard 2.10.0
+- tqdm 4.51.0
+- pandas 1.3.0
+- timm 0.6.11
+- torchvision 0.13.1
+- h5py 3.3.0
+- opencv-python 4.8.0.76
+- matplotlib 3.4.2
+- PyYAML 5.4.1
 ```
 
 3. Compile the CUDA code for data preparation
