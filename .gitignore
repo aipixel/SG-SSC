@@ -1,0 +1,7 @@
+__pycache__/
+log/
+.ipynb_checkpoints/
+.idea/
+*.so
+runcount.csv
+paths.conf
