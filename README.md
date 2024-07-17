@@ -50,7 +50,7 @@ nvcc --ptxas-options=-v --compiler-options '-fPIC' -o lib_preproc.so --shared li
 ## Datasets and Pretrained Models 🛢️
 
 The datasets are available at [GoogleEarth](https://drive.google.com/drive/folders/1Oc1s6fhosjmmsjTyLUtYztJN7V5GudKW?usp=sharing)
-+ Please download the Datasets to the folder `data`.
++ Please download the Datasets to the folder `./data`.
 + If you need to modify the data path, please modify the configuration in `paths.conf`.
 
 The pretrained models are available as below.
@@ -61,7 +61,7 @@ The pretrained models are available as below.
 ## Inference 🚩
 
 We provide an example to use our code.
-1. Please download the pretrained models to the folder `weights`.
+1. Please download the pretrained models to the folder `./weights`.
 
 2. Use the `feature_preprocess.py` script to preprocess the desired datasets. Example: 
 ``` 
