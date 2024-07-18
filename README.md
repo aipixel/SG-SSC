@@ -49,11 +49,15 @@ nvcc --ptxas-options=-v --compiler-options '-fPIC' -o lib_preproc.so --shared li
 
 ## Datasets and Pretrained Models 🛢️
 
-The datasets are available at [GoogleEarth](https://drive.google.com/drive/folders/1Oc1s6fhosjmmsjTyLUtYztJN7V5GudKW?usp=sharing)
-+ Please download the Datasets to the folder `./data`.
-+ If you need to modify the data path, please modify the configuration in `paths.conf`.
+1. We use the NYU, NYUCAD, and SemanticKITTI datasets in our experiments, which are available below:
 
-The pretrained models are available as below.
++ [NYU](https://drive.google.com/file/d/1eHX9yqCW609UpZWe6MEYhgqg54XmbSz2/view?usp=sharing)
++ [NYUCAD](https://drive.google.com/file/d/1zfSzGURMgj7WLtMmUINHrj0Z2n_BoIhl/view?usp=sharing)
++ Follow [VoxFormer](https://github.com/NVlabs/VoxFormer?tab=readme-ov-file) to obtrain the [SemanticKITTI](https://github.com/NVlabs/VoxFormer/blob/main/docs/prepare_dataset.md)
+
+Please download the Datasets to the folder `./data`. If you need to modify the data path, please modify the configuration in `paths.conf`.
+
+2. The pretrained models are available as below.
 + [NYU](https://drive.google.com/drive/folders/1HKGPzniCtPYJL4RMMbBi1XcQYM45m6ue?usp=sharing)
 + [NYUCAD](https://drive.google.com/drive/folders/1LOE-FZdvyRQwAKLoNz0lgSaRmnm8_MeH?usp=sharing)
 + [SemanticKITTI](https://drive.google.com/drive/folders/1mSxRUNJe9XK9TFx9TesHSkWE2cp4hgFn?usp=sharing)
@@ -86,5 +90,5 @@ Then, use the `feature_preprocess.py` script to preprocess the desired datasets.
 python train_ssc.py --dataset NYUCAD --batch_size 4
 ```
 
-## [License]
+## License
 This project is licensed under MIT License.
