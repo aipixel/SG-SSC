@@ -1,94 +1,122 @@
-# 2D Semantic-guided Semantic Scene Completion
-<p align="center"> 
-<img src="images/Overview.png">
-</p>
+# GRNet
 
-## Introduction
+This repository contains the source code for the paper [GRNet: Gridding Residual Network for Dense Point Cloud Completion](https://arxiv.org/abs/2006.03761).
 
-This repository contains the source code for the paper 2D Semantic-guided Semantic Scene Completion
+[![codebeat badge](https://codebeat.co/badges/4e490a68-1a17-4274-a9f8-d7521458eb7f)](https://codebeat.co/projects/github-com-hzxie-grnet-master)
 
-## Changelog 🔥
+![Overview](https://www.infinitescript.com/projects/GRNet/GRNet-Overview.png)
 
-- [2024/07/16] The models and code are released.
-- [2024/04/15] The repo is created.
+## Cite this work
 
-## Installation 📥
-
-Moreover, this repository introduces an integrated Semantic Scene Completion Benchmark implemented in Python 3.8, PyTorch 1.12 and CUDA 11.3. 
-
-1. You can use the following command to install PyTorch with CUDA 11.3. 
 ```
-conda create -n ssc python=3.8
-conda activate ssc
-conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.3 -c pytorch
-```
-
-2. Install dependencies:
-```
-- imageio 2.19.1
-- Pillow 9.1.0
-- scikit-image 0.19.3
-- scikit-learn 0.24.2
-- scipy 1.7.0
-- tensorboard 2.10.0
-- tqdm 4.51.0
-- pandas 1.3.0
-- timm 0.6.11
-- torchvision 0.13.1
-- h5py 3.3.0
-- opencv-python 4.8.0.76
-- matplotlib 3.4.2
-- PyYAML 5.4.1
+@inproceedings{xie2020grnet,
+  title={GRNet: Gridding Residual Network for Dense Point Cloud Completion},
+  author={Xie, Haozhe and 
+          Yao, Hongxun and 
+          Zhou, Shangchen and 
+          Mao, Jiageng and 
+          Zhang, Shengping and 
+          Sun, Wenxiu},
+  booktitle={ECCV},
+  year={2020}
+}
 ```
 
-3. Compile the CUDA code for data preparation
-``` 
-cd src
-nvcc --ptxas-options=-v --compiler-options '-fPIC' -o lib_preproc.so --shared lib_preproc.cu
+## Datasets
+
+We use the [ShapeNet](https://www.shapenet.org/), [Compeletion3D](http://completion3d.stanford.edu/), and [KITTI](http://www.cvlibs.net/datasets/kitti/) datasets in our experiments, which are available below:
+
+- [ShapeNet](https://drive.google.com/drive/folders/1P_W1tz5Q4ZLapUifuOE4rFAZp6L1XTJz)
+- [Completion3D](http://download.cs.stanford.edu/downloads/completion3d/dataset2019.zip)
+- [KITTI](https://drive.google.com/drive/folders/1fSu0_huWhticAlzLh3Ejpg8zxzqO1z-F)
+
+## Pretrained Models
+
+The pretrained models on ShapeNet are available as follows:
+
+- [GRNet for ShapeNet](https://gateway.infinitescript.com/?fileName=GRNet-ShapeNet.pth) (306.8 MB)
+- [GRNet for KITTI](https://gateway.infinitescript.com/?fileName=GRNet-KITTI.pth) (306.8 MB)
+
+## Prerequisites
+
+#### Clone the Code Repository
+
+```
+git clone https://github.com/hzxie/GRNet.git
 ```
 
-## Datasets and Pretrained Models 🛢️
+#### Install Python Denpendencies
 
-1. We use the NYU, NYUCAD, and SemanticKITTI datasets in our experiments, which are available below:
-
-+ [NYU](https://drive.google.com/file/d/1eHX9yqCW609UpZWe6MEYhgqg54XmbSz2/view?usp=sharing)
-+ [NYUCAD](https://drive.google.com/file/d/1zfSzGURMgj7WLtMmUINHrj0Z2n_BoIhl/view?usp=sharing)
-+ Follow [VoxFormer](https://github.com/NVlabs/VoxFormer?tab=readme-ov-file) to obtrain the [SemanticKITTI](https://github.com/NVlabs/VoxFormer/blob/main/docs/prepare_dataset.md)
-
-Please download the Datasets to the folder `./data`. If you need to modify the data path, please modify the configuration in `paths.conf`.
-
-2. The pretrained models are available as below.
-+ [NYU](https://drive.google.com/drive/folders/1HKGPzniCtPYJL4RMMbBi1XcQYM45m6ue?usp=sharing)
-+ [NYUCAD](https://drive.google.com/drive/folders/1LOE-FZdvyRQwAKLoNz0lgSaRmnm8_MeH?usp=sharing)
-+ [SemanticKITTI](https://drive.google.com/drive/folders/1mSxRUNJe9XK9TFx9TesHSkWE2cp4hgFn?usp=sharing)
-
-## Inference 🚩
-
-We provide an example to use our code.
-1. Please download the pretrained models to the folder `./weights`.
-
-2. Use the `feature_preprocess.py` script to preprocess the desired datasets. Example: 
-``` 
-python feature_preprocess.py --dataset NYUCAD --weights NYUCAD_FF
+```
+cd GRNet
+pip install -r requirements.txt
 ```
 
-3. Use the `eval_ssc.py` script for calculating metrics. Example:
-``` 
-python eval_ssc.py --dataset NYUCAD --weights NYUCAD_SSC
+#### Build PyTorch Extensions
+
+**NOTE:** PyTorch >= 1.4, CUDA >= 9.0 and GCC >= 4.9 are required.
+
+```
+GRNET_HOME=`pwd`
+
+# Chamfer Distance
+cd $GRNET_HOME/extensions/chamfer_dist
+python setup.py install --user
+
+# Cubic Feature Sampling
+cd $GRNET_HOME/extensions/cubic_feature_sampling
+python setup.py install --user
+
+# Gridding & Gridding Reverse
+cd $GRNET_HOME/extensions/gridding
+python setup.py install --user
+
+# Gridding Loss
+cd $GRNET_HOME/extensions/gridding_loss
+python setup.py install --user
 ```
 
-## Training 👩🏽‍💻
+#### Preprocess the ShapeNet dataset
 
-1. Use the `train_feature_fusion.py` script to pre-train the feature fusion of the desired dataset. Example: 
-``` 
-python train_feature_fusion.py --dataset NYUCAD --batch_size 4
 ```
-Then, use the `feature_preprocess.py` script to preprocess the desired datasets. 
+cd $GRNET_HOME/utils
+python lmdb_serializer.py /path/to/shapenet/train.lmdb /path/to/output/shapenet/train
+python lmdb_serializer.py /path/to/shapenet/valid.lmdb /path/to/output/shapenet/val
+```
 
-2. Use the `train_ssc.py` script to train the desired dataset. Example:
-``` 
-python train_ssc.py --dataset NYUCAD --batch_size 4
+You can download the processed ShapeNet dataset [here](https://gateway.infinitescript.com/?fileName=ShapeNetCompletion).
+
+#### Update Settings in `config.py`
+
+You need to update the file path of the datasets:
+
+```
+__C.DATASETS.COMPLETION3D.PARTIAL_POINTS_PATH    = '/path/to/datasets/Completion3D/%s/partial/%s/%s.h5'
+__C.DATASETS.COMPLETION3D.COMPLETE_POINTS_PATH   = '/path/to/datasets/Completion3D/%s/gt/%s/%s.h5'
+__C.DATASETS.SHAPENET.PARTIAL_POINTS_PATH        = '/path/to/datasets/ShapeNet/ShapeNetCompletion/%s/partial/%s/%s/%02d.pcd'
+__C.DATASETS.SHAPENET.COMPLETE_POINTS_PATH       = '/path/to/datasets/ShapeNet/ShapeNetCompletion/%s/complete/%s/%s.pcd'
+__C.DATASETS.KITTI.PARTIAL_POINTS_PATH           = '/path/to/datasets/KITTI/cars/%s.pcd'
+__C.DATASETS.KITTI.BOUNDING_BOX_FILE_PATH        = '/path/to/datasets/KITTI/bboxes/%s.txt'
+
+# Dataset Options: Completion3D, ShapeNet, ShapeNetCars, KITTI
+__C.DATASET.TRAIN_DATASET                        = 'ShapeNet'
+__C.DATASET.TEST_DATASET                         = 'ShapeNet'
+```
+
+## Get Started
+
+To train GRNet, you can simply use the following command:
+
+```
+python3 runner.py
+```
+
+To test GRNet, you can use the following command:
+
+```
+python3 runner.py --test --weights=/path/to/pretrained/model.pth
 ```
 
 ## License
-This project is licensed under MIT License.
+
+This project is open sourced under MIT license.
