@@ -55,7 +55,7 @@ nvcc --ptxas-options=-v --compiler-options '-fPIC' -o lib_preproc.so --shared li
 + [NYUCAD](https://drive.google.com/file/d/1zfSzGURMgj7WLtMmUINHrj0Z2n_BoIhl/view?usp=sharing)
 + Follow [VoxFormer](https://github.com/NVlabs/VoxFormer?tab=readme-ov-file) to obtain the [SemanticKITTI](https://github.com/NVlabs/VoxFormer/blob/main/docs/prepare_dataset.md)
 
-Please download the Datasets to the folder `./data`. If you need to modify the data path, please modify the configuration in `paths.conf`.
+  Please download the datasets to the folder `./data`. If you need to modify the data path, please modify the configuration in `paths.conf`.
 
 2. The pretrained models are available as below.
 + [NYU](https://drive.google.com/drive/folders/1HKGPzniCtPYJL4RMMbBi1XcQYM45m6ue?usp=sharing)
@@ -83,7 +83,7 @@ python eval_ssc.py --dataset NYUCAD --weights NYUCAD_SSC
 ``` 
 python train_feature_fusion.py --dataset NYUCAD --batch_size 4
 ```
-Then, use the `feature_preprocess.py` script to preprocess the desired datasets. 
+  Then, use the `feature_preprocess.py` script to preprocess the desired datasets. 
 
 2. Use the `train_ssc.py` script to train the desired dataset. Example:
 ``` 
