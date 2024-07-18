@@ -53,9 +53,9 @@ nvcc --ptxas-options=-v --compiler-options '-fPIC' -o lib_preproc.so --shared li
 
 + [NYU](https://drive.google.com/file/d/1eHX9yqCW609UpZWe6MEYhgqg54XmbSz2/view?usp=sharing)
 + [NYUCAD](https://drive.google.com/file/d/1zfSzGURMgj7WLtMmUINHrj0Z2n_BoIhl/view?usp=sharing)
-+ Follow [VoxFormer](https://github.com/NVlabs/VoxFormer?tab=readme-ov-file) to obtrain the [SemanticKITTI](https://github.com/NVlabs/VoxFormer/blob/main/docs/prepare_dataset.md)
++ Follow [VoxFormer](https://github.com/NVlabs/VoxFormer?tab=readme-ov-file) to obtain the [SemanticKITTI](https://github.com/NVlabs/VoxFormer/blob/main/docs/prepare_dataset.md)
 
-   Please download the Datasets to the folder `./data`. If you need to modify the data path, please modify the configuration in `paths.conf`.
+Please download the Datasets to the folder `./data`. If you need to modify the data path, please modify the configuration in `paths.conf`.
 
 2. The pretrained models are available as below.
 + [NYU](https://drive.google.com/drive/folders/1HKGPzniCtPYJL4RMMbBi1XcQYM45m6ue?usp=sharing)
